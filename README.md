@@ -87,4 +87,4 @@ services:
 docker compose up -d
 ```
 
-Copiar en ```.env.template``` y renombrarlo a ```.env```
+Copiar ```.env.template``` y renombrarlo a ```.env```
