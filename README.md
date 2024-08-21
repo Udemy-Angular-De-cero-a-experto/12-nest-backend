@@ -81,7 +81,7 @@ services:
     restart: always
 ```
 
-## Backen en Nest
+## Backend en Nest
 
 ```
 docker compose up -d
