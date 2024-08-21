@@ -3,7 +3,8 @@ version: '3'
 services:
   db:
     container_name: mean-db
-    image: mongo:5.0.28
+    # image: mongo:5.0.28
+    image: mongo:8.0.0-rc18
     volumes:
       - ./mongo:/data/db
     ports:
