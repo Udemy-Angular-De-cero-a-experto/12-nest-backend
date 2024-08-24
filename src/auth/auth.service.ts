@@ -40,7 +40,7 @@ export class AuthService {
 
     } catch ( error ) {
       if ( error.code === 11000 ) {
-        throw new BadRequestException( `${ createUserDto.email } ya existe.` );
+        throw new BadRequestException( `El correo "${ createUserDto.email }" ya existe.` );
       }
       throw new InternalServerErrorException( `Ha ocurrido el error ${ error.code }` );
     }
@@ -83,11 +83,31 @@ export class AuthService {
   }
 
   async findUserById( id: string ) {
-    const user = this.userModel.findById( id );
-    const { password, ...rest } = (await user).toJSON();
+    const user = await this.userModel.findById( id );
+    const { password, ...rest } = user.toJSON();
 
     return rest;
   }
+
+  async existEmail( email: string ): Promise<boolean> {
+    const user = await this.userModel.findOne({ email });
+
+    if ( user ) {
+      console.log( 'email encontrado');
+      return true;
+    }
+
+    console.log( 'email NO encontrado');
+    return false;
+  }
+
+  // async findUserByEmail( checkEmailDto: CheckEmailDto ): Promise<User> {
+  //   const { email } = checkEmailDto;
+  //   const user = this.userModel.findOne({ email });
+  //   const { password, ...rest } = (await user).toJSON();
+
+  //   return rest;
+  // }
 
   findOne(id: number) {
     return `This action returns a #${id} auth`;
